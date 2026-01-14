@@ -38,3 +38,16 @@ body {
     border: 2px solid lightcoral;
     padding: 20px;
 }
+
+/* Responsive Design - Mobile */
+@media (max-width: 768px) {
+    .product-section {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 20px;
+    }
+    
+    .container {
+        padding: 10px;
+    }
+}
