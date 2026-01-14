@@ -23,6 +23,9 @@ body {
     border-radius: 12px;
     padding: 30px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
 }
 
 /* Temporary borders to see our layout */
