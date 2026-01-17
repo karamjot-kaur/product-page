@@ -151,4 +151,12 @@ body {
     .container {
         padding: 10px;
     }
+
+    .main-image {
+        max-width: 100%; /* Full width on mobile */
+    }
+    
+    .thumbnail-container {
+        max-width: 100%; /* Full width on mobile */
+    }
 }
