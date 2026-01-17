@@ -15,8 +15,60 @@
 
             <!-- Left Side: Image Gallery -->
             <div class="gallery">
-                <h2>Image Gallery Goes Here</h2>
+                
+                <!-- Main Image Display -->
+                <div class="main-image">
+                    <img id="mainImage" src="img/1.jpg" alt="Product Preview">
+                </div>
+                
+                <!-- Thumbnail Carousel with Navigation Arrows -->
+                <div class="thumbnail-container">
+                    <button class="scroll-btn left" onclick="scrollThumbnails(-1)">&#8249;</button>
+                    
+                    <div class="thumbnail-grid" id="thumbnailGrid">
+                        <div class="thumbnail active" onclick="changeImage(this, 'img/1.jpg')">
+                            <img src="img/1.jpg" alt="Thumbnail 1">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage(this, 'img/2.jpg')">
+                            <img src="img/2.jpg" alt="Thumbnail 2">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage(this, 'img/3.jpg')">
+                            <img src="img/3.jpg" alt="Thumbnail 3">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage(this, 'img/4.jpg')">
+                            <img src="img/4.jpg" alt="Thumbnail 4">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage(this, 'img/1.jpg')">
+                            <img src="img/1.jpg" alt="Thumbnail 5">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage(this, 'img/2.jpg')">
+                            <img src="img/2.jpg" alt="Thumbnail 6">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage(this, 'img/3.jpg')">
+                            <img src="img/3.jpg" alt="Thumbnail 7">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage(this, 'img/4.jpg')">
+                            <img src="img/4.jpg" alt="Thumbnail 8">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage(this, 'img/1.jpg')">
+                            <img src="img/1.jpg" alt="Thumbnail 9">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage(this, 'img/2.jpg')">
+                            <img src="img/2.jpg" alt="Thumbnail 10">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage(this, 'img/3.jpg')">
+                            <img src="img/3.jpg" alt="Thumbnail 11">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage(this, 'img/4.jpg')">
+                            <img src="img/4.jpg" alt="Thumbnail 12">
+                        </div>
+                    </div>
+                    
+                    <button class="scroll-btn right" onclick="scrollThumbnails(1)">&#8250;</button>
+                </div>
+                
             </div>
+
 
             <!-- Right Side: Product Details -->
             <div class="details">
