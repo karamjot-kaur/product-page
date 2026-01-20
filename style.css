@@ -209,6 +209,32 @@ body {
     .price {
         font-size: 1.75rem;
     }
+
+    .thumbnail {
+        flex: 0 0 90px; /* Larger for better touch */
+        width: 90px;
+        height: 90px;
+    }
+    
+    .scroll-btn {
+        display: none; /* Hide arrows on mobile */
+    }
+    
+    /* Add swipe indicator */
+    .thumbnail-grid {
+        position: relative;
+    }
+    
+    .thumbnail-grid::after {
+        content: '← →';
+        position: absolute;
+        bottom: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 12px;
+        color: #667eea;
+        opacity: 0.7;
+    }
 }
 
 /* ===== SMALL PHONES (480px and below) ===== */
