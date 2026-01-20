@@ -41,6 +41,7 @@ body {
 
 /* Main Image Container */
 .main-image {
+    position: relative;
     width: 100%;
     aspect-ratio: 1;
     background: #f8f8f8;
@@ -60,6 +61,60 @@ body {
 
 .main-image img:hover {
     transform: scale(1.05);
+}
+
+/* Fullscreen Button */
+.fullscreen-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    display: none; /* Hidden by default, shown only on mobile */
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.fullscreen-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: scale(1.1);
+}
+
+/* Fullscreen Mode */
+.main-image.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    background: black;
+    border-radius: 0;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+}
+
+.main-image.fullscreen img {
+    max-width: 100%;
+    max-height: calc(100vh - 40px);
+    object-fit: contain;
+    cursor: zoom-out;
+}
+
+.main-image.fullscreen .fullscreen-btn {
+    top: 25px;
+    right: 25px;
+    background: rgba(255, 255, 255, 0.2);
 }
 
 /* Thumbnail Container */
@@ -114,6 +169,20 @@ body {
     display: none; /* Chrome/Safari */
 }
 
+/* Swipe Indicator - Hidden by default */
+.thumbnail-grid::after {
+    display: none;
+    content: '← →';
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #667eea;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
 /* Individual Thumbnail */
 .thumbnail {
     flex: 0 0 80px;
@@ -142,6 +211,19 @@ body {
 .thumbnail.active {
     border-color: #667eea;
     box-shadow: 0 0 0 2px #667eea;
+}
+
+/* Optimize animations for performance */
+@media (hover: hover) and (pointer: fine) {
+    /* Only apply hover effects on devices that support hover */
+    .thumbnail:hover {
+        transform: scale(1.1);
+        border-color: #764ba2;
+    }
+    
+    .main-image img:hover {
+        transform: scale(1.05);
+    }
 }
 
 /* ===== PRODUCT DETAILS ===== */
@@ -185,7 +267,6 @@ body {
         grid-template-columns: 1fr;
         gap: 25px;
         padding: 20px;
-        /* Add this to ensure proper stacking */
         display: flex;
         flex-direction: column;
     }
@@ -195,11 +276,11 @@ body {
     }
     
     .details {
-        order: 2; /* Make details appear second on mobile */
+        order: 2;
     }
     
     .gallery {
-        order: 1; /* Make gallery appear first on mobile */
+        order: 1;
     }
     
     .details h1 {
@@ -209,31 +290,38 @@ body {
     .price {
         font-size: 1.75rem;
     }
-
-    .thumbnail {
-        flex: 0 0 90px; /* Larger for better touch */
-        width: 90px;
-        height: 90px;
-    }
     
+    /* TOUCH OPTIMIZATIONS */
     .scroll-btn {
         display: none; /* Hide arrows on mobile */
     }
     
-    /* Add swipe indicator */
-    .thumbnail-grid {
-        position: relative;
+    .thumbnail {
+        flex: 0 0 90px; /* Larger for touch */
+        width: 90px;
+        height: 90px;
     }
     
+    /* Show swipe indicator */
     .thumbnail-grid::after {
-        content: '← →';
-        position: absolute;
-        bottom: -25px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 12px;
-        color: #667eea;
-        opacity: 0.7;
+        display: block;
+    }
+    
+    /* Disable hover effects on mobile for better performance */
+    .main-image img:hover {
+        transform: none;
+    }
+    
+    /* Show fullscreen button on mobile */
+    .fullscreen-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Simpler transitions for mobile */
+    .thumbnail.active {
+        transition: border-color 0.2s ease;
     }
 }
 
@@ -248,16 +336,35 @@ body {
         gap: 20px;
     }
     
-    .scroll-btn {
-        width: 32px;
-        height: 32px;
-        font-size: 20px;
+    .thumbnail {
+        flex: 0 0 75px; /* Slightly smaller than 90px for very small screens */
+        width: 75px;
+        height: 75px;
     }
     
-    .thumbnail {
-        flex: 0 0 65px;
-        width: 65px;
-        height: 65px;
+    /* Adjust swipe indicator for small phones */
+    .thumbnail-grid::after {
+        bottom: -20px;
+        font-size: 11px;
+    }
+    
+    /* Adjust fullscreen button size */
+    .fullscreen-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+        top: 10px;
+        right: 10px;
+    }
+    
+    /* Fullscreen mode adjustments for small phones */
+    .main-image.fullscreen {
+        padding: 10px;
+    }
+    
+    .main-image.fullscreen .fullscreen-btn {
+        top: 20px;
+        right: 20px;
     }
     
     .details h1 {
@@ -270,5 +377,31 @@ body {
     
     .description {
         font-size: 1rem;
+    }
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Content visibility for performance */
+img {
+    content-visibility: auto;
+}
+
+/* Optimize for high-DPI mobile screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .main-image {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
     }
 }
